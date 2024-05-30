@@ -53,21 +53,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'modelos.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+
+DATABASES = {
+    'default': {
+        'ENGINE': os.getenv('DB_ENGINE', 'change-me'),
+        'NAME': os.getenv('POSTGRES_DB', 'change-me'),
+        'USER': os.getenv('POSTGRES_USER', 'change-me'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'change-me'),
+        'HOST': os.getenv('POSTGRES_HOST', 'change-me'),
+        'PORT': os.getenv('POSTGRES_PORT', 'change-me'),
+    }
+}
+
 
 WSGI_APPLICATION = 'modelos.wsgi.application'
 
@@ -115,9 +112,16 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+# /data/web/static
+STATIC_ROOT = DATA_DIR / 'static'
+
+MEDIA_URL = '/media/'
+# /data/web/media
+MEDIA_ROOT = DATA_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
